@@ -290,7 +290,7 @@ class WebhookDeliveryService
         EndpointState $state,
         ?string $retryAfter,
     ): void {
-        if (!$classification->isTransient()) {
+        if (!$classification->isTransient() || $state === EndpointState::Disabled) {
             $this->webhookOutboxStore->markFailed($entry, $response);
 
             return;
