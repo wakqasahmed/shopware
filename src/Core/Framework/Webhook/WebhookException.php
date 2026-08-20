@@ -16,6 +16,17 @@ class WebhookException extends HttpException
     public const INVALID_DATA_MAPPING = 'FRAMEWORK__WEBHOOK_INVALID_DATA_MAPPING';
     public const UNKNOWN_DATA_TYPE = 'FRAMEWORK__WEBHOOK_UNKNOWN_DATA_TYPE';
     public const DUPLICATE_DESCRIBED_EVENT = 'FRAMEWORK__WEBHOOK_DUPLICATE_DESCRIBED_EVENT';
+    public const UNEXPECTED_CLASSIFICATION = 'FRAMEWORK__WEBHOOK_UNEXPECTED_CLASSIFICATION';
+
+    public static function unexpectedClassification(string $classification): self
+    {
+        return new self(
+            Response::HTTP_INTERNAL_SERVER_ERROR,
+            self::UNEXPECTED_CLASSIFICATION,
+            'Webhook delivery outcome "{{ classification }}" cannot be recorded as a failure.',
+            ['classification' => $classification]
+        );
+    }
 
     public static function webhookFailedException(string $webhookId, \Throwable $e): self
     {

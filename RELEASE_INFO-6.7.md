@@ -118,6 +118,11 @@ Removing the language that the same write assigns as the new default is now reje
 
 ## Core
 
+### Experimental webhook endpoint health
+
+With `WEBHOOKS_REWORK` enabled, transient delivery failures now move a webhook from `HEALTHY` to `DEGRADED`. Regular deliveries are held until a scheduled trial succeeds.
+
+Operators can configure the transition threshold and trial cooldowns through `shopware.webhook.health.degraded_threshold_count` and `shopware.webhook.health.cooldown_schedule_seconds`. Existing webhook behavior is unchanged while the feature flag is disabled.
 ### An active shipping method must keep at least one usable price
 
 Removing, reassigning or emptying the last usable `shipping_method_price`, or activating a method without one, now returns a `400` (`active_shipping_method_without_price`). Creating a method without prices still works. To remove a matrix, deactivate the method in an earlier request first.
