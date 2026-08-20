@@ -289,7 +289,8 @@ class WebhookHealthService
     }
 
     /**
-     * Pre-rework `error_count` failure handling. Runs only with WEBHOOKS_REWORK off. Renamed from
+     * @deprecated tag:v6.8.0 - Pre-rework `error_count` failure handling. Runs only with WEBHOOKS_REWORK
+     * off and is removed together with the `webhook.active`/`error_count` columns. Renamed from
      * `recordFailure` so the per-delivery {@see recordFailure} can use that name when the
      * flag is on.
      *
@@ -316,8 +317,8 @@ class WebhookHealthService
     }
 
     /**
-     * Pre-rework `error_count` reset. Runs only with WEBHOOKS_REWORK off. With the flag on,
-     * {@see recordSuccess} owns the per-webhook reset.
+     * @deprecated tag:v6.8.0 - Pre-rework `error_count` reset. Runs only with WEBHOOKS_REWORK off and is
+     * removed together with the legacy columns. With the flag on, {@see recordSuccess} owns the per-webhook reset.
      */
     public function resetErrorCount(string $webhookId): void
     {
